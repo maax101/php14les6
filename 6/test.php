@@ -1,16 +1,21 @@
-<?php
-var_dump($_GET);
-if (isset ($_GET['test'])) {
-	$test = $_GET['test'];
-	$path = 'tests/'.$test;
-	$json= file_get_contents($path);
-	$php= json_encode($json);
-	echo $php;
-} else {
-	echo 'тест не загружен!';
-}
-
-
+<?php 
+if (isset($_GET['test_name'])) {
+	$path_file = 'tests/'.$_GET['test_name'];
+	$temp = file_get_contents($path_file);
+	file_put_contents('temp.php', json_decode($temp));
+	$test = file_get_contents('temp.php');
+} else { exit(); }
 ?>
-
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+	<form action="result1.php" method="GET">
+		<input type="text" name="user_name" value="" placeholder="введите свое имя..." required="введите имя">
+		<?php echo $test; ?>
+		<input type="submit" value="результат">
+	</form>	
+</body>
+</html>

@@ -1,52 +1,46 @@
 <?php
-var_dump($_POST);
-if (isset ($_FILES['test']['name']) ){
-	$file = $_FILES['test']['name'];
-	
-	//$temp1 = json_decode($temp);
-	//var_dump($temp1);
+$test_list=['math.json'=>'математика',];
 
-echo '<br><form action="test.php" method="GET">
-	<br>Загружено:'.$file.' 
-	<input type=hidden name="test" value="'.$file.'">
-			
-	<input type="submit"   value="go" >
-	</form>';	
-}else {
-	echo 'Тест не загружен! ';
-}
-
-
+// if (!isset($_FILES['load_test']['name'])) {
+// 	echo 'Нет загруженых тестов';
+// 	exit();
+// } else {
+// 	$test = $_FILES['load_test']['name'];
+// 	move_uploaded_file($_FILES['load_test']['tmp_name'], 'tests/'.$test);
+// 	echo 'загружен: '.$test_list[$test];
+// }
+// if (pathinfo($test,PATHINFO_EXTENSION)!='json') {
+// 	echo 'Выбрано неверное расширение файла';
+// 	exit();
+//}
 
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Загруженые тесты</title>
 </head>
 <body>
-	<p><a href="admin.php">Админка</a></p>
-			
-
-	
+	<p><h2>Список тестов:</h2></p>
+<?php 	if (!isset($_FILES['load_test']['name'])) {
+	echo 'Нет загруженых тестов';
+	exit();
+	} else {
+	$test = $_FILES['load_test']['name'];
+	move_uploaded_file($_FILES['load_test']['tmp_name'], 'tests/'.$test);
+	}	
+	if (pathinfo($test,PATHINFO_EXTENSION)!='json') {
+	echo 'Выбрано неверное расширение файла';
+	exit();
+	}
+	foreach ($test_list as $json => $name) {
+	echo '<li>'.$name.'</li><br>
+	<form action="test.php" method="GET">
+		<input type="hidden" name="test_name" value="'.$test.'">
+		<input type="submit" value="пройти тест">
+	</form>';
+	}
+?>
+<br><a href="admin.php">Администрация</a><br/>
 </body>
 </html>
-
-
-<!-- //echo "<a href="$a">";
-//$test = $_GET['use'] -> $t=json_decode( file_get_contents($test));
-	//echo $t;
-
-
-
-// $test=$_GET['use'];
-// if (!$test){
-// 	echo 'Тест не выбран';
-// 	echo '<form action="admin.php" method="GET">
-// 	<br><input type="submit" value="Вернуться">';
-// }else{
-// 	$t=json_decode( file_get_contents($test));
-// 	echo $t;
-	
-// } -->
