@@ -1,8 +1,13 @@
 <?php
 if (isset ($_FILES['load_test']['name'])) {
     $test = $_FILES['load_test']['name'];
-    move_uploaded_file($_FILES['load_test']['tmp_name'], 'tests/' . $test);
-    header("Location: list.php");
+    if (file_exists($_FILES['load_test']['tmp_name'])) {
+        move_uploaded_file($_FILES['load_test']['tmp_name'], 'tests/' . $test);
+        echo "Файл загружен";
+    } else {
+        echo "Файл НЕ загружен!";
+        exit; 
+    }   
 }
 if (isset($_FILES['load_test']['name'])) {
     $extension = pathinfo($_FILES['load_test']['name'], PATHINFO_EXTENSION);
