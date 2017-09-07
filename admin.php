@@ -3,10 +3,7 @@ if (!empty($_FILES['load_test']['name'])){
     if (isset ($_FILES['load_test']['name'])) {        
         $test = $_FILES['load_test']['name'];
     }
-    if (file_exists($_FILES['load_test']['tmp_name'])) {
-        move_uploaded_file($_FILES['load_test']['tmp_name'], 'tests/' . $test);
-    }
-    if (file_exists('tests/' . $test)) {
+    if (move_uploaded_file($_FILES['load_test']['tmp_name'], 'tests/' . $test)){
         echo "Файл загружен";
     } else {
         echo "Файл НЕ загружен!";       
