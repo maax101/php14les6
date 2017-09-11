@@ -1,20 +1,25 @@
 <?php
-if (!empty($_FILES['load_test']['name'])){
-    if (isset ($_FILES['load_test']['name'])) {        
-        $test = $_FILES['load_test']['name'];
-    }
-    if (move_uploaded_file($_FILES['load_test']['tmp_name'], 'tests/' . $test)){
-        echo "Файл загружен";
-    } else {
-        echo "Файл НЕ загружен!";       
-    } 
-    if (isset($test)) {
-        $extension = pathinfo($test, PATHINFO_EXTENSION);
-        if ($extension != 'json') {
-            echo '<p><h3>Выбрано неверное расширение файла!!!</h3></p>';
+if (isset($_FILES['load_test']['name'])) {
+   if (!empty($_FILES['load_test']['name'])){
+        if (isset ($_FILES['load_test']['name'])) {        
+            $test = $_FILES['load_test']['name'];
         }
-    }
-}  
+        if (move_uploaded_file($_FILES['load_test']['tmp_name'], 'tests/' . $test)){
+            echo "Файл загружен";
+        } else {
+            echo "Файл НЕ загружен!";       
+        } 
+        if (isset($test)) {
+            $extension = pathinfo($test, PATHINFO_EXTENSION);
+            if ($extension != 'json') {
+                echo '<p><h3>Выбрано неверное расширение файла!!!</h3></p>';
+            }
+        }
+    } else {
+        echo "Выберите файл!";
+    }  
+}
+
 ?> 
 <!DOCTYPE html>
 <html>
