@@ -1,9 +1,7 @@
 <?php
 if (isset($_FILES['load_test']['name'])) {
    if (!empty($_FILES['load_test']['name'])){
-        if (isset ($_FILES['load_test']['name'])) {        
-            $test = $_FILES['load_test']['name'];
-        }
+        $test = $_FILES['load_test']['name'];
         if (move_uploaded_file($_FILES['load_test']['tmp_name'], 'tests/' . $test)){
             echo "Файл загружен";
         } else {
